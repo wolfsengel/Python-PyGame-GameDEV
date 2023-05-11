@@ -7,7 +7,12 @@ black = (0, 0, 0)
 red = (255, 0, 0)
  
 dis = pygame.display.set_mode((800, 600))
- 
+#BORDES DE COLOR ROJO
+pygame.draw.rect(dis, red, [0, 0, 800, 10])
+pygame.draw.rect(dis, red, [0, 0, 10, 600])
+pygame.draw.rect(dis, red, [0, 590, 800, 10])
+pygame.draw.rect(dis, red, [790, 0, 10, 600])
+
 game_over = False
  
 x1 = 300
@@ -40,10 +45,20 @@ while not game_over:
     y1 += y1_change
     dis.fill(white)
     pygame.draw.rect(dis, black, [x1, y1, 10, 10])
- 
+    #SISTEMA DE COLISION CONTRA LOS BORDES
+    if x1 > 800 or x1 < 0 or y1 > 600 or y1 < 0:
+        game_over = True
+
     pygame.display.update()
  
     clock.tick(30)
- 
+#TEXTO EN PANTALLA
+font_style = pygame.font.SysFont(None, 50)
+message = font_style.render("Game Over", True, red)
+#ESPERAR 10S PARA CERRAR
+dis.blit(message, [250, 250])
+pygame.display.update()
+pygame.time.wait(10000)
+
 pygame.quit()
 quit()

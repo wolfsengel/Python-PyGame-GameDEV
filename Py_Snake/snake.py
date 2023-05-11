@@ -1,3 +1,4 @@
+import random
 import pygame
  
 pygame.init()
@@ -48,7 +49,14 @@ while not game_over:
     #SISTEMA DE COLISION CONTRA LOS BORDES
     if x1 > 800 or x1 < 0 or y1 > 600 or y1 < 0:
         game_over = True
-
+#GENERAR CUBITO ALEATORIO EN EL MAPA QUE AL CHOCAR CRECE
+    foodx = round(random.randrange(0, 800 - 10) / 10.0) * 10.0
+    foody = round(random.randrange(0, 600 - 10) / 10.0) * 10.0
+    pygame.draw.rect(dis, red, [foodx, foody, 10, 10])
+   #CRECIMIENTO DEL CUBITo al chocar con el cubito rojo
+    if x1 == foodx and y1 == foody:
+        print("Yummy!!")
+        
     pygame.display.update()
  
     clock.tick(30)
@@ -56,7 +64,7 @@ while not game_over:
 font_style = pygame.font.SysFont(None, 50)
 message = font_style.render("Game Over", True, red)
 #ESPERAR 10S PARA CERRAR
-dis.blit(message, [250, 250])
+dis.blit(message, [300, 300])
 pygame.display.update()
 pygame.time.wait(10000)
 
